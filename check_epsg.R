@@ -1,6 +1,27 @@
-
-
 check_epsg <- function(x,y, reproject=1, epsgref=NULL ){
+##--------------------------------------------------------------------------------  
+  # plotmap <- function(bckgnd,vct,bckgnd_pal="terrain.colors",nCols=20,breaks=NULL,resize="To_vct")
+  # A function for plotting geographical data.
+  #
+  #   INPUTS:
+  #       x                        - Raster* or Spatial object
+  #       y   	 	                 - Raster* or Spatial object
+  #       reproject (optional)     - Numeric. Reproject the layers to a common projection
+  #                                  system. 1: reproject the layers, 0: do not reproject.
+  #                                  Default to 1.
+  #       epsgref (optional)       - CRS object or a character string describing a projection
+  #                                  and datum in the PROJ.4 format. The projection system the
+  #                                  x and y should be reprojected to. Default to NULL, the
+  #                                  epsg of the heaviest layer will be kept.
+  #   OUTPUTS:
+  #       A list containing the reprojected layers and the common projection system.
+  #
+  ## Exemple :
+  # see README.md
+  #
+  #   Revision: 0.0 Date: 2018/10/24 Carine Poncelet
+  #           original function
+##--------------------------------------------------------------------------------
   
   ## Retrieve epsg from input layers
   epsg_x <- crs(x,asText=TRUE)
@@ -21,7 +42,7 @@ check_epsg <- function(x,y, reproject=1, epsgref=NULL ){
   }
   
   ## Prepare for export
-  if( reproject==0 | Equal_epsg ){
+  if( reproject == 0 | Equal_epsg ){
     reproj_x <- x
     reproj_y <- y
     epsgref <- crs(x,asText=TRUE)
