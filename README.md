@@ -5,7 +5,7 @@ This project aims at gathering some usefull tools to work with GIS whithin R.
 
 ## Prerequisites
 * R programming language
-* R packages 'raster' and 'rgdal' and 'rgeos'
+* R packages 'raster', 'rgdal' and 'rgeos'
 
 ## Content
 *	**check_epsg.R**: a function to check if two geographical layers are in the same projection system (and reproject them if needed)
