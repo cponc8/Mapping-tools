@@ -7,6 +7,11 @@ This project aims at gathering some usefull tools to work with GIS whithin R.
 * R programming language
 * R packages 'raster' and 'rgdal' and 'rgeos'
 
+## Content
+*	**check_epsg.R**: a function to check if two geographical layers are in the same projection system (and reproject them if needed)
+*	**plotmap.R**: a fonction to display a vector layer on top of a raster layer
+* **Map.pdf**: An exemple of a map of France produced using the check_epsg and plotmap functions (see working example below)
+
 ## Working example
 ```R
 ## Load R libraries
