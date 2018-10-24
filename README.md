@@ -5,23 +5,34 @@ This project aims at gathering some usefull tools to work with GIS whithin R.
 
 ## Prerequisites
 * R programming language
-* R packages 'raster' and 'rgdal'
+* R packages 'raster' and 'rgdal' and 'rgeos'
 
 ## Working example
 ```R
 ## Load R libraries
-library(raster)
-library(rgdal)
+library( raster )
+library( rgdal )
+library( rgeos )
 
-## Import specific functions
-source("PathTo/check_epsg.R")
+## Set-up project
+setwd( "/path/to/myMaps/" )
+source( "./check_epsg.R" )
+source( "./plotmap.R" )
 
-## Import data
-x <- raster("PathTo/myRaster.tif") # could also be a vector layer
-y <- readOGR(dsn="PathTo",layer="myVector") # could also be a raster layer
+## Import raster layer (= background)
+mnt <- raster( "./my_background.tif" )
+## Import vector layer
+dpt <- readOGR( dsn="./",layer="my_boundaries" )
 
 ## Reproject data if needed
-reprojXY <- check_epsg(x,y)
-x <- reprojXY$x
-y <- reprojXY$y
+reprojXY <- check_epsg( x=mnt,y=dpt )
+mnt <- reprojXY$x
+dpt <- reprojXY$y
+
+## plotmap function options (Optionnal)
+TabCol <- c( "#71ABD8","#6AD055", "#63BF4E", "#88C651", "#ACCC54", "#C6D758", "#DEE45E", "#EFE162", "#E8D65F", "#DECB5B", "#D3BF57", "#CAAC53", "#C39D50", "#B9934C", "#AA8046", "#AC8547", "#BA904C", "#CA9B53", "#E0E0DE", "#F5F4F2")
+TabBreaks <- c(-10^9,0,20,100,150,200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2500,3000,10^5)
+
+## Create output map
+plotmap( bckgnd=mnt,vct=dpt,breaks=TabBreaks,bckgnd_pal=TabCol )
 ```
